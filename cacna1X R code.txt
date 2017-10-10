@@ -1,0 +1,18 @@
+# Making the distance matrix of the scnXa proteins
+aln <- import.fasta(system.file("msa/cacna1X.fa", package = "bios2mds"))
+mat.dis1 <- mat.dis(aln,aln)
+mat.dis1
+
+# Perform an MDS on the distance matrix
+active <- mat.dis1
+mmds(active)
+
+# Make a term for the MDS
+mmds1 <- mmds(active)
+
+# Color the MDS according to your excel file
+coloredmds <-col.group(mmds1,system.file("csv/cacna1X.csv", package = "bios2mds"))
+
+# Make a 3D plot of the MDS just performed with spheres of a defined radius
+mmds.3D.plot(coloredmds, radius=0.05)
+bbox3d(shininess=0.5)
